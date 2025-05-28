@@ -1,0 +1,132 @@
+/* Font */
+.font-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Background Animation */
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.bg-animate {
+    background-size: 200% 200%;
+    animation: bgShift 15s ease-in-out infinite;
+}
+
+/* Spinner */
+.spinner {
+    border: 4px solid transparent;
+    border-top: 4px solid #ff6b6b;
+    border-right: 4px solid #4ecdc4;
+    border-bottom: 4px solid #45b7d1;
+    border-left: 4px solid #96c93d;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Fade In */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Borders & Glow */
+.gradient-border {
+    border: 2px solid transparent;
+    border-image: linear-gradient(to right, #4ecdc4, #45b7d1, #ff6b6b) 1;
+    transition: border-image 0.5s ease;
+}
+
+.gradient-border-input {
+    border: 1px solid transparent;
+    border-image: linear-gradient(to right, #ff6b6b, #96c93d, #4ecdc4) 1;
+    transition: border-image 0.5s ease, box-shadow 0.3s ease;
+}
+
+.glow-effect {
+    box-shadow: 0 0 20px rgba(69, 183, 209, 0.4);
+    transition: box-shadow 0.3s ease;
+}
+
+.glow-effect:hover {
+    box-shadow: 0 0 30px rgba(69, 183, 209, 0.6);
+}
+
+.glow-on-focus:focus {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+    border-image: linear-gradient(to right, #3b82f6, #60a5fa) 1;
+}
+
+/* Neon Glow */
+.neon-glow {
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+.neon-glow:hover {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.7), 0 0 30px rgba(59, 130, 246, 0.5);
+}
+
+/* Pulse */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse-on-hover:hover {
+    animation: pulse 0.6s ease-in-out infinite;
+}
+
+/* Form Container */
+.form-container {
+    max-height: 80vh;
+    overflow-y: auto;
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+/* Scrollbar */
+.form-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.form-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.form-container::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.6);
+    border-radius: 10px;
+}
+
+.form-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.8);
+}
+
+/* Ensure header and footer text remains white */
+header,
+footer {
+    color: #ffffff;
+}
+
+/* Align form container to the left with some margin */
+main {
+    display: flex;
+    justify-content: flex-start; /* Align to the left */
+    align-items: center;
+    padding-left: 2rem; /* Add some margin from the left edge */
+}

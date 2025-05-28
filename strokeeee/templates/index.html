@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>StrokeShield</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 min-h-screen flex flex-col transition-all duration-700 bg-animate text-gray-800 font-poppins">
+    <!-- Particle Background -->
+    <div id="particles-js" class="absolute inset-0 z-0"></div>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 shadow-lg transition-colors duration-700 relative z-10">
+        <div class="flex justify-between items-center px-6 max-w-7xl mx-auto">
+            <h1 class="text-3xl font-bold tracking-wide">StrokeShield</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex justify-center items-center p-6 relative z-10">
+        <div class="form-container bg-white/30 backdrop-blur-lg p-8 rounded-2xl shadow-2xl w-full max-w-md transform transition-all hover:scale-105 border border-white/20">
+            <h2 class="text-2xl font-semibold text-center mb-6 tracking-wide text-gray-900">Predict Your Stroke Risk</h2>
+            <form method="POST" id="predictionForm" onsubmit="showLoading()">
+                <!-- Age -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-2 text-gray-900">Age</label>
+                    <input type="number" name="age" step="0.1" required class="w-full p-3 border rounded-lg bg-white/50 border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-all gradient-border-input glow-on-focus">
+                </div>
+                <!-- Hypertension -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-2 text-gray-900">Hypertension</label>
+                    <select name="hypertension" required class="w-full p-3 border rounded-lg bg-white/50 border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-all gradient-border-input glow-on-focus">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <!-- Heart Disease -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-2 text-gray-900">Heart Disease</label>
+                    <select name="heart_disease" required class="w-full p-3 border rounded-lg bg-white/50 border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-all gradient-border-input glow-on-focus">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <!-- Glucose -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-2 text-gray-900">Average Glucose Level</label>
+                    <input type="number" name="avg_glucose_level" step="0.01" required class="w-full p-3 border rounded-lg bg-white/50 border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-all gradient-border-input glow-on-focus">
+                </div>
+                <!-- BMI -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-2 text-gray-900">BMI</label>
+                    <input type="number" name="bmi" step="0.1" required class="w-full p-3 border rounded-lg bg-white/50 border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-all gradient-border-input glow-on-focus">
+                </div>
+                <!-- Gender -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-2 text-gray-900">Gender</label>
+                    <select name="gender" required class="w-full p-3 border rounded-lg bg-white/50 border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-all gradient-border-input glow-on-focus">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <!-- Ever Married -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-2 text-gray-900">Ever Married</label>
+                    <select name="ever_married" required class="w-full p-3 border rounded-lg bg-white/50 border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-all gradient-border-input glow-on-focus">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <!-- Work Type -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-2 text-gray-900">Work Type</label>
+                    <select name="work_type" required class="w-full p-3 border rounded-lg bg-white/50 border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-all gradient-border-input glow-on-focus">
+                        <option value="Private">Private</option>
+                        <option value="Self-employed">Self-employed</option>
+                        <option value="Govt_job">Govt Job</option>
+                        <option value="Children">Children</option>
+                        <option value="Never worked">Never Worked</option>
+                    </select>
+                </div>
+                <!-- Residence Type -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-2 text-gray-900">Residence Type</label>
+                    <select name="residence_type" required class="w-full p-3 border rounded-lg bg-white/50 border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-all gradient-border-input glow-on-focus">
+                        <option value="Urban">Urban</option>
+                        <option value="Rural">Rural</option>
+                    </select>
+                </div>
+                <!-- Smoking Status -->
+                <div class="mb-6">
+                    <label class="block font-medium mb-2 text-gray-900">Smoking Status</label>
+                    <select name="smoking_status" required class="w-full p-3 border rounded-lg bg-white/50 border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-all gradient-border-input glow-on-focus">
+                        <option value="never smoked">Never Smoked</option>
+                        <option value="formerly smoked">Formerly Smoked</option>
+                        <option value="smokes">Smokes</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <!-- Submit -->
+                <button type="submit" class="w-full p-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-blue-800 transition-all flex justify-center items-center pulse-on-hover neon-glow">
+                    <span id="buttonText">Predict</span>
+                    <span id="loadingSpinner" class="hidden spinner"></span>
+                </button>
+            </form>
+
+            {% if prediction %}
+            <div class="result mt-6 p-4 text-center font-semibold rounded-lg animate-fadeIn bg-white/30 border border-white/20 backdrop-blur-lg text-gray-900">
+                <h3>Prediction: {{ prediction }}</h3>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 text-center transition-colors duration-700 shadow-inner relative z-10">
+        <p>© 2025 Stroke Prediction. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Particle.js Initialization
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: ['#4ecdc4', '#45b7d1', '#ff6b6b', '#96c93d'] },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // Loading Spinner
+        function showLoading() {
+            document.getElementById('buttonText').classList.add('hidden');
+            document.getElementById('loadingSpinner').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
